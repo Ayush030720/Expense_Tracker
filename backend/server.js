@@ -13,12 +13,14 @@ app.use("/api/expenses", require("./routes/expenseRoutes"));
 app.use("/api/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/export", require("./routes/exportRoutes"));
 
-
-app.listen(5000, () => console.log("Server running on port 5000"));
-
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
 
-app.use(cors({
-  origin: "*"
-}));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
