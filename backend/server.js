@@ -19,9 +19,10 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-
 app.use(
   cors({
-    origin: "*",
+    origin: "https://expense-tracker-liard-six-51.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
