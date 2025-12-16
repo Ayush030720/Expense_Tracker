@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../api/axios";
 import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   // 🔐 PROTECTION — paste THIS PART at the top
@@ -12,6 +13,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -20,7 +22,7 @@ export default function Login() {
 
       const res = await API.post("/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {
