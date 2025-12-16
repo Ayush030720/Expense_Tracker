@@ -31,16 +31,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={styles.nav}>
-      <h3 style={styles.logo}>Expense Tracker</h3>
+ <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+  <span className="navbar-brand fw-bold">Expense Tracker</span>
 
-      <div style={styles.links}>
-        <Link to="/dashboard" style={styles.link}>Dashboard</Link>
-        <button onClick={downloadCSV} style={styles.btn}>Export CSV</button>
-        <button onClick={downloadPDF} style={styles.btn}>Export PDF</button>
-        <button onClick={logout} style={styles.logout}>Logout</button>
-      </div>
-    </nav>
+  <div className="ms-auto d-flex gap-2">
+    <button className="btn btn-outline-light btn-sm" onClick={downloadCSV}>
+      Export CSV
+    </button>
+    <button className="btn btn-outline-light btn-sm" onClick={downloadPDF}>
+      Export PDF
+    </button>
+    <button className="btn btn-danger btn-sm" onClick={logout}>
+      Logout
+    </button>
+  </div>
+</nav>
+
   );
 }
 

@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [expenses, setExpenses] = useState([]);
 
   const fetchExpenses = async () => {
-    const res = await API.get("/expenses?month=9&year=2025");
+    const res = await API.get("/expenses");
     setExpenses(res.data);
   };
 
@@ -16,10 +16,18 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <ExpenseForm refresh={fetchExpenses} />
-      <ExpenseList expenses={expenses} refresh={fetchExpenses} />
+    <div className="container mt-4">
+      <h3 className="mb-4">Dashboard</h3>
+
+      <div className="row g-3">
+        <div className="col-12 col-md-4">
+          <ExpenseForm refresh={fetchExpenses} />
+        </div>
+
+        <div className="col-12 col-md-8">
+          <ExpenseList expenses={expenses} refresh={fetchExpenses} />
+        </div>
+      </div>
     </div>
   );
 }
