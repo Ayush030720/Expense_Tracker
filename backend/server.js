@@ -6,14 +6,22 @@ const connectDB = require("./config/db");
 connectDB();
 const app = express();
 
+/**
+ * MUST be FIRST middleware
+ */
 app.use(
   cors({
     origin: "https://expense-tracker-liard-six-51.vercel.app",
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
+
+/**
+ * Explicit preflight handling (IMPORTANT)
+ */
+app.options("*", cors());
 
 app.use(express.json());
 
@@ -23,7 +31,4 @@ app.use("/api/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/export", require("./routes/exportRoutes"));
 
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
