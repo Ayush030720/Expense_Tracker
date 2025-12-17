@@ -21,7 +21,7 @@ app.listen(PORT, () => {
 
 app.use(
   cors({
-    origin: "https://expense-tracker-git-main-ayush030720s-projects.vercel.app",
+    origin: "https://expense-tracker-liard-six-51.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
