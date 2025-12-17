@@ -1,30 +1,27 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./config/db");
 
 connectDB();
 const app = express();
 
-/* 🔥 CORS FIX — MUST BE FIRST */
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://expense-tracker-liard-six-51.vercel.app"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
+/**
+ * MUST be FIRST middleware
+ */
+app.use(
+  cors({
+    origin: "https://expense-tracker-liard-six-51.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  next();
-});
+/**
+ * Explicit preflight handling (IMPORTANT)
+ */
+app.options("*", cors());
 
 app.use(express.json());
 
