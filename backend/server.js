@@ -5,7 +5,16 @@ const connectDB = require("./config/db");
 
 connectDB();
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://expense-tracker-liard-six-51.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
@@ -18,11 +27,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-app.use(
-  cors({
-    origin: "https://expense-tracker-liard-six-51.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
