@@ -5,7 +5,7 @@ const connectDB = require("./config/db");
 
 connectDB();
 const app = express();
-app.use(express.json());
+
 /**
  * MUST be FIRST middleware
  */
@@ -22,6 +22,7 @@ app.use(
  * Explicit preflight handling (IMPORTANT)
  */
 // app.options("*", cors());
+app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/expenses", require("./routes/expenseRoutes"));
